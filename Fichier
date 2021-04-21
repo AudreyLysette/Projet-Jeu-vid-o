@@ -1,0 +1,52 @@
+//fonctions
+#include "fonction.h"
+#include "option.h"
+#include "sound.h"
+#include "debut.h"
+#include "stage1.h"
+#include "multi.h"
+#include "intro.h"
+#include "debut.h"
+#include "stage2.h"
+#define TEMPS 30
+
+#define speed 6
+void positionninja(int *i,int *k)
+{       if((*k)==2)
+                (*i)--;
+	if((*k)==1)
+		(*i)++;
+	if((*i)==100)
+	(*k)=2;
+	if((*i)==0)
+	(*k)=1;	
+}
+void roto_zoom(SDL_Surface **ecran,SDL_Surface **surface,SDL_Surface **Rotation,SDL_Rect *pos)
+{
+	double angle=0, zoom=1;
+	int sens=1,continuer=1,tempsPrecedent = 0, tempsActuel = 0;
+	SDL_Event event;
+	while(continuer)
+	{
+		while (SDL_PollEvent(&event))
+		switch(event.type)
+		{
+			case SDL_KEYDOWN:
+            		switch (event.key.keysym.sym)
+            		{	
+				case SDLK_n:
+				continuer=0;
+				break;
+            		}
+		}
+		tempsActuel = SDL_GetTicks();
+
+        if (tempsActuel - tempsPrecedent > TEMPS)
+
+        {
+
+	angle+=2;
+            tempsPrecedent = tempsActuel;
+
+        }
+		        else
